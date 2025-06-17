@@ -1,0 +1,44 @@
+# Node.js / Frontend
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Angular (specific for Angular project)
+angular-todo/node_modules/
+angular-todo/dist/
+angular-todo/tmp/
+angular-todo/out-tsc/
+angular-todo/.angular/
+angular-todo/.env
+
+# React (specific for React project)
+react-todo/node_modules/
+react-todo/build/
+react-todo/dist/
+react-todo/.env
+
+# Svelte (specific for Svelte project)
+svelte-todo/node_modules/
+svelte-todo/public/build/
+svelte-todo/.env
+
+# Python / FastAPI (backend)
+*.pyc
+*.pyo
+__pycache__/
+env/
+venv/
+*.env
+backend/.env
+
+# IDE files (e.g., VS Code, PyCharm)
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

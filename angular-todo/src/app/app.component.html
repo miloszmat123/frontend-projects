@@ -1,0 +1,103 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+<div class="container">
+  <div class="header">
+    <h1>Todo App</h1>
+    <p>Manage your tasks efficiently</p>
+  </div>
+
+  <form (ngSubmit)="addTask()" class="task-form">
+    <div class="d-flex gap-2">
+      <input
+        type="text"
+        [(ngModel)]="newTaskTitle"
+        name="newTaskTitle"
+        class="form-control"
+        placeholder="Add a new task..."
+      />
+      <button type="submit" class="btn btn-primary">Add Task</button>
+    </div>
+  </form>
+
+  <div class="filter-buttons">
+    <button
+      class="btn"
+      [class.btn-primary]="filter === 'all'"
+      [class.btn-outline-primary]="filter !== 'all'"
+      (click)="setFilter('all')"
+    >
+      All
+    </button>
+    <button
+      class="btn"
+      [class.btn-primary]="filter === 'active'"
+      [class.btn-outline-primary]="filter !== 'active'"
+      (click)="setFilter('active')"
+    >
+      Active
+    </button>
+    <button
+      class="btn"
+      [class.btn-primary]="filter === 'completed'"
+      [class.btn-outline-primary]="filter !== 'completed'"
+      (click)="setFilter('completed')"
+    >
+      Completed
+    </button>
+  </div>
+
+  <ul class="list-group task-list">
+    <li *ngIf="filteredTasks.length === 0" class="list-group-item empty-state">
+      <i class="bi bi-clipboard-check"></i>
+      <p>No tasks found</p>
+    </li>
+    <li *ngFor="let task of filteredTasks" class="list-group-item d-flex align-items-center gap-3">
+      <input
+        type="checkbox"
+        class="form-check-input flex-shrink-0"
+        [checked]="task.completed"
+        (change)="toggleTask(task)"
+      />
+      <div class="flex-grow-1" (dblclick)="startEditing(task)">
+        <ng-container *ngIf="editingId === task.id; else viewMode">
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="editText"
+            (blur)="handleEdit(task)"
+            (keyup.enter)="handleEdit(task)"
+            autofocus
+          />
+        </ng-container>
+        <ng-template #viewMode>
+          <span [class.text-decoration-line-through]="task.completed">
+            {{ task.title }}
+          </span>
+        </ng-template>
+      </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-primary btn-sm" (click)="startEditing(task)">
+          <i class="bi bi-pencil"></i>
+        </button>
+        <button class="btn btn-danger btn-sm" (click)="deleteTask(task.id)">
+          <i class="bi bi-trash"></i>
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
